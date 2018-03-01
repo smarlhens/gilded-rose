@@ -1,5 +1,6 @@
 package fr.esiea;
 
+import fr.esiea.models.*;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 

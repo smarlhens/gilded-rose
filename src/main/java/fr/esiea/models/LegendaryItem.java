@@ -1,13 +1,13 @@
-package fr.esiea;
+package fr.esiea.models;
 
-public class ConjuredItem extends Item {
-    
+public class LegendaryItem extends Item {
+
     private Item item;
 
     /**
-     * Make any item conjured
+     * Make any item legendary
      */
-    public ConjuredItem(Item item) {
+    public LegendaryItem(Item item) {
         this.item = item;
     }
 
@@ -23,16 +23,8 @@ public class ConjuredItem extends Item {
         return this.item.quality;
     }
 
-    public void setQuality(int quality) {
-        this.item.quality = quality;
-    }
-
     public int getSellIn() {
         return this.item.sellIn;
-    }
-
-    public void setSellIn(int sellIn) {
-        this.item.sellIn = sellIn;
     }
 
     public String toString() {
@@ -40,11 +32,9 @@ public class ConjuredItem extends Item {
     }
 
     /**
-     * The Quality of a conjured item degrades two times faster than a normal item.
+     * The Quality of a legendary item can never be altered.
      */
     public void updateQuality() {
-        this.item.updateQuality();
-        this.item.updateQuality();
     }
-    
+
 }

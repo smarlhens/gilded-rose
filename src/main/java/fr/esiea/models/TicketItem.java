@@ -1,4 +1,4 @@
-package fr.esiea;
+package fr.esiea.models;
 
 public class TicketItem extends Item {
 
