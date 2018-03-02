@@ -1,5 +1,6 @@
 package fr.esiea;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,6 +28,6 @@ public class ItemControllerTest {
     public void getIndex() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Welcome to GildedRose !")));
+                .andExpect(content().string(containsString("Welcome to ")));
     }
 }

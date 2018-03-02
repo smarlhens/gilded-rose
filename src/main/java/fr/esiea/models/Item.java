@@ -2,11 +2,14 @@ package fr.esiea.models;
 
 public class Item {
 
+    protected int id;
     protected String name;
     protected int sellIn;
     protected int quality;
+    protected int price;
+    protected int quantity;
 
-    public Item(){
+    public Item() {
         this.name = "";
         this.sellIn = 0;
         this.quality = 0;
@@ -16,6 +19,30 @@ public class Item {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
+    }
+
+    public Item(String name, int sellIn, int quality, int price, int quantity) {
+        this.name = name;
+        this.sellIn = sellIn;
+        this.quality = quality;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public Item(Item item) {
+        this.name = item.name;
+        this.sellIn = item.sellIn;
+        this.quality = item.quality;
+        this.price = item.price;
+        this.quantity = item.quantity;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -43,10 +70,26 @@ public class Item {
     }
 
     public String toString() {
-        return this.name + ", " + this.sellIn + ", " + this.quality;
+        return this.name + ", sellIn : " + this.sellIn + ", quality : " + this.quality + ", price : " + this.price + ", quantity : " + this.quantity;
     }
 
-    public void updateQuality(){
+    public void updateQuality() {
         this.quality -= (this.sellIn > 0) ? 1 : 2;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

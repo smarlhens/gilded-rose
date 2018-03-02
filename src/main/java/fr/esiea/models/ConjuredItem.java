@@ -35,8 +35,20 @@ public class ConjuredItem extends Item {
         this.item.sellIn = sellIn;
     }
 
+    public int getPrice() {
+        return this.item.price;
+    }
+
+    public int getQuantity() {
+        return this.item.quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.item.quantity = quantity;
+    }
+
     public String toString() {
-        return this.item.name + ", " + this.item.sellIn + ", " + this.item.quality;
+        return this.item.name + ", sellIn : " + this.item.sellIn + ", quality : " + this.item.quality + ", price : " + this.item.price + ", quantity : " + this.item.quantity;
     }
 
     /**

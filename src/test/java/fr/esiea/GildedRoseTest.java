@@ -20,6 +20,16 @@ public class GildedRoseTest {
             .as("foo name")
             .isEqualTo("foo");
 
+        item.setPrice(10);
+        solftly.assertThat(item.getPrice())
+                .as("foo price")
+                .isEqualTo(10);
+
+        item.setQuantity(2);
+        solftly.assertThat(item.getQuantity())
+                .as("foo quantity")
+                .isEqualTo(2);
+
         solftly.assertThat(item.getQuality())
             .as("foo quality")
             .isEqualTo(0);
@@ -30,7 +40,7 @@ public class GildedRoseTest {
 
         solftly.assertThat(item.toString())
             .as("foo toString")
-            .isEqualTo("foo, 0, 0");
+            .isEqualTo("foo, sellIn : 0, quality : 0, price : 10, quantity : 2");
 
 
         solftly.assertAll();
@@ -149,7 +159,7 @@ public class GildedRoseTest {
 
         solftly.assertThat(legendaryItem.toString())
             .as("legendaryItem toString")
-            .isEqualTo("Sulfuras, Hand of Ragnaros, -1, 80");
+            .isEqualTo("Sulfuras, Hand of Ragnaros, sellIn : -1, quality : 80, price : 0, quantity : 0");
 
         solftly.assertAll();
     }
@@ -166,7 +176,7 @@ public class GildedRoseTest {
 
         solftly.assertThat(legendaryItem.toString())
             .as("legendaryItem toString")
-            .isEqualTo("bar, 0, 80");
+            .isEqualTo("bar, sellIn : 0, quality : 80, price : 0, quantity : 0");
 
         solftly.assertAll();
     }
@@ -293,7 +303,7 @@ public class GildedRoseTest {
 
         solftly.assertThat(conjuredItem.toString())
             .as("conjuredItem toString")
-            .isEqualTo("bar, 1, 1");
+            .isEqualTo("bar, sellIn : 1, quality : 1, price : 0, quantity : 0");
 
         solftly.assertAll();
     }

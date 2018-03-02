@@ -6,6 +6,12 @@ public class TicketItem extends Item {
         super(name, sellIn, quality);
     }
 
+
+
+    public TicketItem(Item item) {
+        super(item);
+    }
+
     /**
      * Ticket increases in Quality as its SellIn value approaches;
      * Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but

@@ -20,7 +20,23 @@ public class LegendaryItem extends Item {
     }
 
     public int getQuality() {
-        return this.item.quality;
+        if(this.item.name.toLowerCase().equals("sulfuras")){
+            return 80;
+        }else {
+            return this.item.quality;
+        }
+    }
+
+    public int getPrice() {
+        return this.item.price;
+    }
+
+    public int getQuantity() {
+        return this.item.quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.item.quantity = quantity;
     }
 
     public int getSellIn() {
@@ -28,7 +44,7 @@ public class LegendaryItem extends Item {
     }
 
     public String toString() {
-        return this.item.name + ", " + this.item.sellIn + ", " + this.item.quality;
+        return this.item.name + ", sellIn : " + this.item.sellIn + ", quality : " + this.item.quality + ", price : " + this.item.price + ", quantity : " + this.item.quantity;
     }
 
     /**

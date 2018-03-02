@@ -6,6 +6,10 @@ public class CheeseItem extends Item {
         super(name, sellIn, quality);
     }
 
+    public CheeseItem(Item item) {
+        super(item);
+    }
+
     /**
      * Cheese actually increases in Quality the older it gets
      */
