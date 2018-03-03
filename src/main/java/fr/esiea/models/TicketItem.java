@@ -3,7 +3,6 @@ package fr.esiea.models;
 public class TicketItem extends Item {
 
     public TicketItem() {
-        super();
     }
 
     public TicketItem(String name, int sellIn, int quality) {

@@ -3,7 +3,6 @@ package fr.esiea.models;
 public class CheeseItem extends Item {
 
     public CheeseItem() {
-        super();
     }
 
     public CheeseItem(String name, int sellIn, int quality) {

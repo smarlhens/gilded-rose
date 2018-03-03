@@ -1,64 +1,35 @@
 package fr.esiea.models;
 
 public class LegendaryItem extends Item {
+    public LegendaryItem() {
+    }
 
-    private Item item;
+    public LegendaryItem(String name, int sellIn, int quality) {
+        super(name, sellIn, quality);
+    }
+
+    public LegendaryItem(String name, int sellIn, int quality, int price, int quantity) {
+        super(name, sellIn, quality, price, quantity);
+    }
 
     /**
      * Make any item legendary
      */
     public LegendaryItem(Item item) {
-        this.item = item;
+        super(item);
     }
-
-    public String getName() {
-        return this.item.name;
-    }
-
-    public void setName(String name) {
-        this.item.name = name;
-    }
-
+	
     public int getQuality() {
-        if(this.item.name.toLowerCase().equals("sulfuras")){
+        if(this.name.toLowerCase().equals("sulfuras")){
             return 80;
         }else {
-            return this.item.quality;
+            return this.quality;
         }
     }
-
-    public int getPrice() {
-        return this.item.price;
-    }
-
-    public void setPrice(int price) {
-        this.item.price = price;
-    }
-
-    public int getQuantity() {
-        return this.item.quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.item.quantity = quantity;
-    }
-
-    public int getSellIn() {
-        return this.item.sellIn;
-    }
-
-    public void setSellIn(int sellIn) {
-        this.item.sellIn = sellIn;
-    }
-
-    public String toString() {
-        return this.item.name + ", sellIn : " + this.item.sellIn + ", quality : " + this.item.quality + ", price : " + this.item.price + ", quantity : " + this.item.quantity;
-    }
-
+    
     /**
      * The Quality of a legendary item can never be altered.
      */
     public void updateQuality() {
     }
-
 }
