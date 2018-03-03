@@ -18,7 +18,7 @@ public class DatabaseAdapter {
     private final BiMap<Integer, Item> database = HashBiMap.create();
     private final AtomicInteger sequenceGenerator = new AtomicInteger();
     private static final Logger LOGGER = LoggerFactory.getLogger(GildedRoseApplication.class);
-    private static DatabaseAdapter INSTANCE = new DatabaseAdapter();
+    private static DatabaseAdapter INSTANCE;
 
     private DatabaseAdapter() {
     }
@@ -31,6 +31,7 @@ public class DatabaseAdapter {
             database.put(id, item);
             LOGGER.info(item + " created with ID: " + id);
         } else {
+            this.updateItem(item);
             id = database.inverse().get(item);
             LOGGER.info(item + " already exists with ID: " + id);
         }
@@ -42,7 +43,7 @@ public class DatabaseAdapter {
     }
 
     public void updateItem(Item item) {
-        this.database.put(item.getId(), item);
+        this.database.forcePut(item.getId(), item);
     }
 
     public boolean removeItem(Item item) {
@@ -55,14 +56,14 @@ public class DatabaseAdapter {
 
     public List<Item> getItems() {
         return database.entrySet()
-                .stream()
-                .map(Entry::getValue)
-                .collect(Collectors.toList());
+            .stream()
+            .map(Entry::getValue)
+            .collect(Collectors.toList());
     }
 
     public void setItems(Item[] items) {
         for (Item item : items) {
-            this.database.forcePut(item.getId(), item);
+            this.addItem(item);
         }
     }
 

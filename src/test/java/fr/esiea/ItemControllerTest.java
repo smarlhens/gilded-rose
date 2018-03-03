@@ -2,6 +2,7 @@ package fr.esiea;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,9 +26,59 @@ public class ItemControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void getIndex() throws Exception {
+    public void index() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Welcome to ")));
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("Welcome to ")));
     }
+
+    @Test
+    public void prices() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/prices").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("[]")));
+    }
+
+    @Test
+    public void add_buy_item_normal() throws Exception {
+        Integer id = Integer.parseInt(mvc.perform(MockMvcRequestBuilders.get("/add?name=biere&sellin=30&quality=10&price=7&quantity=2&type=item&attribute=normal").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(greaterThan("0")))
+            .andReturn().getResponse().getContentAsString());
+        mvc.perform(MockMvcRequestBuilders.get("/buy?id=" + id + "&quantity=4").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(equalTo("Il ne reste que 2 exemplaire(s) du produit que vous désirez (biere).")));
+        mvc.perform(MockMvcRequestBuilders.get("/buy?id=" + id + "&quantity=1").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(equalTo("Merci pour votre achat de 1 biere.")));
+        mvc.perform(MockMvcRequestBuilders.get("/buy?id=" + id + "&quantity=1").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(equalTo("Merci pour votre achat de 1 biere.")));
+        mvc.perform(MockMvcRequestBuilders.get("/buy?id=" + id + "&quantity=2").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(equalTo("Le produit n'existe pas.")));
+    }
+
+    @Test
+    public void add_cheese_legendary() throws Exception {
+        Integer id = Integer.parseInt(mvc.perform(MockMvcRequestBuilders.get("/add?name=emmental&sellin=30&quality=80&price=100&quantity=1&type=cheese&attribute=legendary").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(greaterThan("0")))
+            .andReturn().getResponse().getContentAsString());
+        mvc.perform(MockMvcRequestBuilders.get("/buy?id=" + id + "&quantity=1").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(equalTo("Merci pour votre achat de 1 emmental.")));
+    }
+
+    @Test
+    public void add_ticket_conjured() throws Exception {
+        Integer id = Integer.parseInt(mvc.perform(MockMvcRequestBuilders.get("/add?name=jul&sellin=30&quality=10&price=50&quantity=1&type=ticket&attribute=conjured").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(greaterThan("0")))
+            .andReturn().getResponse().getContentAsString());
+        mvc.perform(MockMvcRequestBuilders.get("/buy?id=" + id + "&quantity=1").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(equalTo("Merci pour votre achat de 1 jul.")));
+    }
+
 }

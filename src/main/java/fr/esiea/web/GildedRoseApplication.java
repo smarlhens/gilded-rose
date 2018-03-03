@@ -32,6 +32,8 @@ public class GildedRoseApplication {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GildedRoseApplication.class);
 
+    public static int status = -1;
+
     public static void main(String[] args) {
         SpringApplication.run(GildedRoseApplication.class);
         Runnable updateQualityTask = () -> {
@@ -45,6 +47,7 @@ public class GildedRoseApplication {
         };
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.scheduleAtFixedRate(updateQualityTask, 0L, 15L, TimeUnit.MINUTES);
+        status = 0;
     }
 
     @Bean

@@ -18,15 +18,15 @@ public class LegendaryItem extends Item {
     public LegendaryItem(Item item) {
         super(item);
     }
-	
+
     public int getQuality() {
-        if(this.name.toLowerCase().equals("sulfuras")){
+        if (this.name.toLowerCase().equals("sulfuras")) {
             return 80;
-        }else {
+        } else {
             return this.quality;
         }
     }
-    
+
     /**
      * The Quality of a legendary item can never be altered.
      */

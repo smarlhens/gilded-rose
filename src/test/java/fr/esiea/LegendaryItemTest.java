@@ -21,10 +21,10 @@ public class LegendaryItemTest {
 
         solftly.assertAll();
     }
-    
+
     @Test
     public void legendary_item_never_has_to_be_sold_or_decreases_in_quality() {
-        Item legendaryItem = new LegendaryItem(new Item("Sulfuras, Hand of Ragnaros", -1, 80));
+        Item legendaryItem = new LegendaryItem(new Item("Sulfuras", -1, 80));
         Item[] items = new Item[]{legendaryItem};
         GildedRose tavern = new GildedRose(items);
         tavern.updateQuality();
@@ -32,7 +32,7 @@ public class LegendaryItemTest {
         SoftAssertions solftly = new SoftAssertions();
         solftly.assertThat(legendaryItem.getName())
             .as("legendaryItem name")
-            .isEqualTo("Sulfuras, Hand of Ragnaros");
+            .isEqualTo("Sulfuras");
 
         solftly.assertThat(legendaryItem.getQuality())
             .as("legendaryItem quality")
@@ -44,7 +44,7 @@ public class LegendaryItemTest {
 
         solftly.assertThat(legendaryItem.toString())
             .as("legendaryItem toString")
-            .isEqualTo("Sulfuras, Hand of Ragnaros, sellIn : -1, quality : 80, price : 0, quantity : 0");
+            .isEqualTo("Sulfuras, sellIn : -1, quality : 80, price : 0, quantity : 0");
 
         solftly.assertAll();
     }
