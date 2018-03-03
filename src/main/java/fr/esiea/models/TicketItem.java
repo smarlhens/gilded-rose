@@ -2,11 +2,17 @@ package fr.esiea.models;
 
 public class TicketItem extends Item {
 
+    public TicketItem() {
+        super();
+    }
+
     public TicketItem(String name, int sellIn, int quality) {
         super(name, sellIn, quality);
     }
 
-
+    public TicketItem(String name, int sellIn, int quality, int price, int quantity) {
+        super(name, sellIn, quality, price, quantity);
+    }
 
     public TicketItem(Item item) {
         super(item);

@@ -31,6 +31,10 @@ public class LegendaryItem extends Item {
         return this.item.price;
     }
 
+    public void setPrice(int price) {
+        this.item.price = price;
+    }
+
     public int getQuantity() {
         return this.item.quantity;
     }
@@ -41,6 +45,10 @@ public class LegendaryItem extends Item {
 
     public int getSellIn() {
         return this.item.sellIn;
+    }
+
+    public void setSellIn(int sellIn) {
+        this.item.sellIn = sellIn;
     }
 
     public String toString() {

@@ -6,6 +6,7 @@ import com.google.common.collect.HashBiMap;
 import fr.esiea.web.GildedRoseApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.Map.Entry;
 
 import java.util.List;
@@ -17,8 +18,9 @@ public class DatabaseAdapter {
     private final BiMap<Integer, Item> database = HashBiMap.create();
     private final AtomicInteger sequenceGenerator = new AtomicInteger();
     private static final Logger LOGGER = LoggerFactory.getLogger(GildedRoseApplication.class);
+    private static DatabaseAdapter INSTANCE = new DatabaseAdapter();
 
-    public DatabaseAdapter() {
+    private DatabaseAdapter() {
     }
 
     public int addItem(Item item) {
@@ -35,11 +37,11 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public Item getItem(int id){
+    public Item getItem(int id) {
         return database.getOrDefault(id, null);
     }
 
-    public void updateItem(Item item){
+    public void updateItem(Item item) {
         this.database.put(item.getId(), item);
     }
 
@@ -51,10 +53,27 @@ public class DatabaseAdapter {
         return true;
     }
 
-    public List<Item> getItems(){
-            return database.entrySet()
-                    .stream()
-                    .map(Entry::getValue)
-                    .collect(Collectors.toList());
+    public List<Item> getItems() {
+        return database.entrySet()
+                .stream()
+                .map(Entry::getValue)
+                .collect(Collectors.toList());
+    }
+
+    public void setItems(Item[] items) {
+        for (Item item : items) {
+            this.database.forcePut(item.getId(), item);
+        }
+    }
+
+    public static DatabaseAdapter getInstance() {
+        if (INSTANCE == null) {
+            synchronized (DatabaseAdapter.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new DatabaseAdapter();
+                }
+            }
+        }
+        return INSTANCE;
     }
 }

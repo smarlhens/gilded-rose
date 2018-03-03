@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class ItemController {
 
     private ObjectMapper mapper = new ObjectMapper();
-    private DatabaseAdapter da = new DatabaseAdapter();
+    private DatabaseAdapter da = DatabaseAdapter.getInstance();
 
     @RequestMapping("/")
     public String index() {

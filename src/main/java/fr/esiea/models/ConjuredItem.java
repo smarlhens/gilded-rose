@@ -39,6 +39,10 @@ public class ConjuredItem extends Item {
         return this.item.price;
     }
 
+    public void setPrice(int price) {
+        this.item.price = price;
+    }
+
     public int getQuantity() {
         return this.item.quantity;
     }
